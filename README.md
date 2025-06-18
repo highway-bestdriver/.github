@@ -22,17 +22,34 @@ highway-bestdriver/
 - **Infra**: Docker, EC2 (Ubuntu), Nginx, WebSocket
 
 ## ⚙️ 설치 및 실행 방법
-### 1. 프론트엔드 실행
+## How to Run
+### Front-end
 ```bash
+git clone https://github.com/highway-bestdriver/BuildX-FE.git
 cd BuildX-FE
-~~~
+npm install
+npm run dev
 ```
+- https://buildx-one.vercel.app/ 에서 실행됩니다.
 
-### 2. 백엔드 실행
+### Back-end
+- 주요 파일:
+  `Dockerfile`, `docker-compose.yml`, `requirements.txt`, `app/`, `nginx/conf/`
+
+- **프레임워크**: FastAPI + Celery + Redis + Nginx
+
+- **실행 여부**:  
+  `docker-compose.yml`과 `Dockerfile`이 존재하므로 **도커 기반으로 실행 가능**
+
+Docker 및 Docker Compose가 설치되어 있어야 합니다.
 ```bash
+git clone https://github.com/highway-bestdriver/BuildX-BE.git
 cd BuildX-BE
-~~~~
+docker-compose up --build
 ```
+- FastAPI 서버는 포트 8000에서 실행됩니다.
+- WebSocket은 :8000/ws/log로 접속됩니다.
+- Celery 작업 큐는 Redis를 브로커로 사용합니다.
 
 ### 3. 전체 실행 (Docker 통합 시)
 ```bash
