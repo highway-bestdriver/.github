@@ -18,18 +18,18 @@ BuildX는 인공지능(AI) 이론을 학습했지만 코딩에 익숙하지 않�
 ---
 
 ## 주요 기술 스택
-- **Frontend**: React, Recharts
-- **Backend**: FastAPI, Celery, Redis, PyTorch, OpenAI GPT API
-- **Infra**: Docker, EC2 (Ubuntu), Nginx, WebSocket
+- **Frontend**: React, Recharts, TypeScript
+- **Backend**: FastAPI, Celery, Docker, WebSocket
+- **AI**: OpenAI GPT-4 API, PyTorch
+- **배포 및 환경**: AWS EC2, Docker Compose, Nginx
 
-## 설치 및 실행 방법
-## How to Run
+## How to Build
 ### Front-end
 #### Requirements
 - Node.js (>= 18)
 - npm
 
-#### 설치 및 실행
+#### Build
 ```bash
 git clone https://github.com/highway-bestdriver/BuildX-FE.git
 cd BuildX-FE
@@ -52,7 +52,7 @@ Docker 및 Docker Compose가 설치되어 있어야 합니다.
 - Docker
 - Docker Compose
 
-#### 설치 및 실행
+#### Build
 ```bash
 git clone https://github.com/highway-bestdriver/BuildX-BE.git
 cd BuildX-BE
@@ -62,9 +62,16 @@ docker-compose up --build
 - WebSocket은 :8000/ws/log로 접속됩니다.
 - Celery 작업 큐는 Redis를 브로커로 사용합니다.
 
-#### 테스트 방법
-- 프론트엔드에서 학습 요청 시, 백엔드 Celery를 통해 학습 코드가 실행되고, 실시간 로그가 WebSocket으로 전달됩니다.
-- Postman 등을 이용해 API 수동 테스트 가능
+## How to Install & Run
+### 전체 시스템 실행 방법
+1. BuildX-FE, BuildX-BE 두 저장소를 각각 clone
+2. docker-compose를 사용해 백엔드 서버 실행
+3. 프론트엔드에서 접속 후 UI 기반 AI 모델 설계를 시작
+
+## How to Test
+- Frontend는 Jest 기반 테스트 스크립트 포함
+- Backend는 FastAPI의 Swagger UI (/docs), Postman 통해 REST API 호출 및 개별 테스트 가능
+- 모델 학습 시 로그는 실시간으로 WebSocket을 통해 시각화
 
 ## 테스트 시나리오
 - 블록 UI로 CNN 모델 설계 → 완료 후 코드 생성 버튼 클릭
@@ -77,7 +84,7 @@ docker-compose up --build
 ---
 
 ## Sample Data & DB
-- 기본 학습용 이미지 데이터셋 (MNIST 등)은 프론트엔드에서 선택 가능
+- 기본 학습용 이미지 데이터셋 (MNIST 등의 Public Dataset)은 프론트엔드에서 선택 가능
 - 사용자 정의 모델 JSON 구조는 백엔드 학습 요청에 포함되며, 별도 DB는 Redis 캐시 형태로 관리
 
 ---
